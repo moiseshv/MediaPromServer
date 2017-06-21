@@ -1,0 +1,8 @@
+device id = s99179l4LT
+
+functions/devicePing  
+ {"deviceID" : "s99179l4LT" ,"deviceStatus" : "playing" }
+ 
+ 
+functions/addServerVideoPlays
+ {"deviceID" : "s99179l4LT" , "plays" : [ {"videoID": "bz3pn2CPTN" ,"time" : "33"} , {"videoID": "bz3pn2CPTN" ,"time" : "23"}] }
