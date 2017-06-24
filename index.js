@@ -11,6 +11,7 @@ var parse_MOUNT = appConfig.env.PARSE_MOUNT.value;
 var serverURL = appConfig.env.SERVER_URL.value;
 
 var express = require('express');
+var cors = require('cors')
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
 
@@ -24,7 +25,7 @@ var api = new ParseServer({
   appId: APP_ID || 'MEDIA_PROM',
   masterKey: master_KEY || 'MEDIA_PROM_MASTER_KEY', //Add your master key here. Keep it secret!
   serverURL: serverURL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
-  verifyUserEmails: true,
+ verifyUserEmails: true,
   emailVerifyTokenValidityDuration: 2 * 60 * 60, // in seconds (2 hours = 7200 seconds)
   preventLoginWithUnverifiedEmail: false, // defaults to false
   
@@ -42,18 +43,15 @@ var api = new ParseServer({
       // Your API key from mailgun.com
       apiKey: 'key-32f2fc775560682ef61d240c93a8262b',
     }
-  },
-
-  
-  liveQuery: {
-    classNames: ["Device", "MediaItem", "Plays"] // List of classes to support for query subscriptions
   }
+ 
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
 // javascriptKey, restAPIKey, dotNetKey, clientKey
 
 var app = express();
+app.use(cors());
 
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
@@ -64,7 +62,8 @@ app.use(mountPath, api);
 
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', function(req, res) {
-  res.status(200).send('MediaProm Server is Up!');
+  //res.status(200).send('MediaProm Server is Up!');
+  res.json({msg: 'This is CORS-enabled for all origins!'})
 });
 
 // There will be a test page available on the /test path of your server url

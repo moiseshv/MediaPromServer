@@ -1,11 +1,12 @@
 
 Parse.Cloud.define('hello', function (req, res) {
-  console.log(request.params);
-  res.success('Hello from MediaPom');
+   res.success('Hello from MediaPom');
 });
 
 
-
+Parse.Cloud.define('hello1', function(req, res) {
+  res.success('Hi');
+});
 
 // Ping de un Device trae el ID del Device, y Su estado
 // Hay que garantizar que el cliente envie un status
@@ -48,8 +49,6 @@ Parse.Cloud.define("updateDeviceStatus", function (request, response) {
   });
 
 });
-
-
 
 
 // Lista Actualizada de los videos que hay sido play y sus tiempos.
@@ -137,9 +136,6 @@ Parse.Cloud.define("addServerVideoPlays", function (request, response) {
 });
 
 
-
-
-
 // getRelatesMedias
 // Cada device tiene asociados videos que pueden reproducirse 
 // El server le entrega la que tiene en ese momento
@@ -169,6 +165,7 @@ Parse.Cloud.define("getRelatesMedias", function (request, response) {
     });
   });
 });
+
 
 // UpdateDeviceList
 // Cada device envía cada cierto tiempo un request para actualizar su lista de reproducciÓn
@@ -211,4 +208,7 @@ Parse.Cloud.define("updateDeviceList", function (request, response) {
 
 
 });
+
+
+
 
